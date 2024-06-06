@@ -41,13 +41,20 @@ COPY ./constraints-3.8.txt /constraints-3.8.txt
 # Install apache airflow with subpackages
 RUN pip install --upgrade pip && \
     useradd -ms /bin/bash -d ${AIRFLOW_HOME} airflow && \
-    pip install apache-airflow[postgres]==${AIRFLOW_VERSION} --constraint /constraints-3.8.txt
+    pip install apache-airflow[postgres]==${AIRFLOW_VERSION} --constraint /constraints-3.8.txt \
+    pip install polars \ 
+    pip install pyarrow \ 
+    pip install streamlit \
+    pip install matplotlib
 
 # Copy the entrypoint.sh from host to container (at path AIRFLOW_HOME)
 COPY ./entrypoint.sh ./entrypoint.sh
 
 # Copy the DAG file to the docker folder
 COPY ./dags /opt/airflow/dags
+
+# Copy the assets to the docker folder
+COPY ./assets /opt/airflow/assets
 
 # Set the entrypoint.sh file to be executable
 RUN chmod +x ./entrypoint.sh
