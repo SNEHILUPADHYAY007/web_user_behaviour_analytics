@@ -44,9 +44,7 @@ RUN pip install --upgrade pip && \
     pip install apache-airflow[postgres]==${AIRFLOW_VERSION} --constraint /constraints-3.8.txt \
     pip install polars \ 
     pip install pyarrow \ 
-    pip install streamlit \
-    pip install matplotlib
-
+    
 # Copy the entrypoint.sh from host to container (at path AIRFLOW_HOME)
 COPY ./entrypoint.sh ./entrypoint.sh
 

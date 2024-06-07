@@ -24,7 +24,6 @@ def read_csv_file():
     # Making a dict to rename the cols
     # zip(old_col_name, new_col_name)
     new_col_names = dict(zip(col_names_df, req_col_name))
-    print(new_col_names)
     # renaming the cols 
     df = df.rename(new_col_names)
     return df
@@ -37,7 +36,6 @@ def perform_agg(df):
     pl.col("time_spent_in_sec").max().alias("max_time_spent_in_sec"),
     pl.col("time_spent_in_sec").min().alias("min_time_spent_in_sec")
 ).sort("ip_address", descending = False)
-    print(df_new.head(20))
 
     return df_new
 
